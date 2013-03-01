@@ -23,6 +23,8 @@ fetch_command() {
     echo "curl" "-L" "$@"
   elif type wget &>/dev/null; then
     echo "wget" "-O-" "$@"
+  elif type fetch &>/devnull; then
+    echo "fetch" "-qo-" "$@"
   fi
 }
 
