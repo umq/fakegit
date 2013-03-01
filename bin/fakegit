@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 version="1.0.0"
 
@@ -51,9 +51,9 @@ fakegit_clone() {
 
   validate_url $git_repo
   # Git URL -> HTTP URL
-  local https_repo="${git_repo/#git:/https:}"
+  local https_repo="$(echo ${git_repo} | sed -e 's/^git:/https:/')"
   # SSH URL -> HTTP URL
-  https_repo="${https_repo/#git@github.com:/https://github.com/}"
+  https_repo="$(echo ${https_repo} | sed -e 's#^git@github.com:#https://github.com#')"
   local svn_repo="${https_repo%*.git}"
   local proj_name="${svn_repo##*/}"
   local dir="${2:-$proj_name}"
